@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "type": "module",
   "author": {
-    "name": "Alan Reis",
-    "email": "alanreisanjo@gmail.com",
-    "url": "https://hoyasumii.dev"
+    "name": "",
+    "email": "",
+    "url": ""
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -37,13 +37,9 @@
     "test:unit": "vitest run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "setup": "bun run build && bun link",
-    "prepare": "husky"
+    "setup": "bun run build && bun link"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.1",
-    "@commitlint/config-conventional": "^20.4.1",
-    "husky": "^9.1.7",
     "@faker-js/faker": "^10.2.0",
     "@types/bun": "latest",
     "@vitest/coverage-v8": "^4.0.18",

@@ -1,15 +1,20 @@
 #!/bin/bash
 
-# Get the absolute directory where this script is located
+# Abort on any error
+set -e
+source "$(dirname "$0")/theme.sh"
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-INIT_SCRIPT="$SCRIPT_DIR/run.sh"
-UPDATE_SCRIPT="$SCRIPT_DIR/update-agent.sh"
+CAFFEINE_SCRIPT="$SCRIPT_DIR/caffeine.sh"
+INIT_SCRIPT="$SCRIPT_DIR/init.sh"
+UPDATE_DEPS_SCRIPT="$SCRIPT_DIR/install-dependencies.sh"
+SETUP_ENV_SCRIPT="$SCRIPT_DIR/install-environment.sh"
 
-# Ensure scripts are executable
+chmod +x "$CAFFEINE_SCRIPT"
 chmod +x "$INIT_SCRIPT"
-chmod +x "$UPDATE_SCRIPT"
+chmod +x "$UPDATE_DEPS_SCRIPT"
+chmod +x "$SETUP_ENV_SCRIPT"
 
-# Path to zsh configuration file
 ZSHRC="$HOME/.zshrc"
 
 # Function to add alias if it doesn't exist
@@ -20,13 +25,13 @@ add_alias() {
         echo "" >> "$ZSHRC"
         echo "# Caffeine CLI: $name" >> "$ZSHRC"
         echo "alias $name='$script'" >> "$ZSHRC"
-        echo "Alias '$name' added to $ZSHRC"
+        echo -e "${GREEN}${LOGO} Alias '${CYAN}$name${NC}' added to ${UNDERLINE}$ZSHRC${NC}."
     else
-        echo "Command '$name' is already defined in $ZSHRC"
+        echo -e "${YELLOW}${LOGO} Command '${CYAN}$name${NC}' is already defined in ${UNDERLINE}$ZSHRC${NC}."
     fi
 }
 
-add_alias "caffeine:init" "$INIT_SCRIPT"
-add_alias "caffeine:update@agent" "$UPDATE_SCRIPT"
+add_alias "caffeine" "$CAFFEINE_SCRIPT"
 
-echo "Installation complete. To use the new commands, run: source ~/.zshrc"
+echo -e "${GREEN}${LOGO} Installation complete!${NC}"
+echo -e "${TIP} To use the new commands, run: ${CYAN}source ~/.zshrc${NC}"
